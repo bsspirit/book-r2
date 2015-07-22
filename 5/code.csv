@@ -1,0 +1,50 @@
+"code","en","zh","type"
+0,tornado,龙卷风,3
+1,tropical storm,热带风暴,2
+2,hurricane,暴风,3
+3,severe thunderstorms,强雷雨天气,16
+4,thunderstorms,雷雨,11
+5,mixed rain and snow,雨雪,12
+6,mixed rain and sleet,雨雪,12
+7,mixed snow and sleet,雨雪,12
+8,freezing drizzle,冻毛毛雨,11
+9,drizzle,毛毛雨,11
+10,freezing rain,冻雨,11
+11,showers,阵雨,11
+12,showers,阵雨,11
+13,snow flurries,小雪,13
+14,light snow showers,阵雪,13
+15,blowing snow,飞雪,13
+16,snow,雪,14
+17,hail,冰雹,15
+18,sleet,雨雪,12
+19,dust,灰尘,5
+20,foggy,雾,7
+21,haze,薄雾,7
+22,smoky,烟雾弥漫,6
+23,blustery,大风,3
+24,windy,风,4
+25,cold,冷,18
+26,cloudy,多云,8
+27,mostly cloudy (night),满云密布,8
+28,mostly cloudy (day),满云密布,8
+29,partly cloudy (night),少云,9
+30,partly cloudy (day),少云,9
+31,clear (night),晴,10
+32,sunny,睛,10
+33,fair (night),晴,10
+34,fair (day),晴,10
+35,mixed rain and hail,大雨和冰雹,16
+36,hot,热,1
+37,isolated thunderstorms,局部雷雨,11
+38,scattered thunderstorms,零星雷雨,11
+39,scattered thunderstorms,零星雷雨,11
+40,scattered showers,零星阵雨,11
+41,heavy snow,大雪,14
+42,scattered snow showers,零星阵雪,13
+43,heavy snow,大雪,14
+44,partly cloudy,少云,9
+45,thundershowers,雷阵雨,11
+46,snow showers,阵雪,13
+47,isolated thundershowers,局部雷雨,11
+3200,not available,无数据,19

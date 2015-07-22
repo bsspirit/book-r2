@@ -1,0 +1,8 @@
+.gitignore
+dist
+metadata
+^.*\.Rproj$
+^\.Rproj\.user$
+README*
+NEWS*
+FAQ*

@@ -1,0 +1,9 @@
+Package: sayHello
+Type: Package
+Title: R package demo for sayHello
+Version: 1.0
+Date: 2014-09-28
+Author: Dan Zhang
+Maintainer: Dan Zhang <bsspirit@gmail.com>
+Description: This package provides a package demo
+License: GPL-3
