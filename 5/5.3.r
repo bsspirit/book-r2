@@ -2,23 +2,30 @@ library(RCurl)
 library(XML)
 
 getWeather<-function (x){
-   url<-paste('http://weather.yahooapis.com/forecastrss?w=',x,'&u=c',sep="")
-   doc = xmlTreeParse(getURL(url),useInternal = TRUE)
-
-   ans<-getNodeSet(doc, "//yweather:atmosphere")
-   humidity<-as.numeric(sapply(ans, xmlGetAttr, "humidity"))
-   visibility<-as.numeric(sapply(ans, xmlGetAttr, "visibility"))
-   pressure<-as.numeric(sapply(ans, xmlGetAttr, "pressure"))
-   rising<-as.numeric(sapply(ans, xmlGetAttr, "rising"))
-
-   ans<-getNodeSet(doc, "//item/yweather:condition")
-   code<-sapply(ans, xmlGetAttr, "code")
-   ans<-getNodeSet(doc, "//item/yweather:forecast[1]")
-   low<-as.numeric(sapply(ans, xmlGetAttr, "low"))
-   high<-as.numeric(sapply(ans, xmlGetAttr, "high"))
-
-   print(paste(x,'==>',low,high,code,humidity,visibility,pressure,rising))
-   cbind(low,high,code,humidity,visibility,pressure,rising)
+  url<-paste('https://query.yahooapis.com/v1/public/yql',
+             '?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D',
+             x,
+             '&format=xml',
+             '&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',sep='')
+  
+  xml <- getURL(url,.opts = list(ssl.verifypeer = FALSE))
+  doc <- xmlTreeParse(xml,useInternal = TRUE)
+  
+  ans<-getNodeSet(doc, "//yweather:atmosphere",c(yweather="http://xml.weather.yahoo.com/ns/rss/1.0"))
+  humidity<-as.numeric(sapply(ans, xmlGetAttr, "humidity"))
+  visibility<-as.numeric(sapply(ans, xmlGetAttr, "visibility"))
+  pressure<-as.numeric(sapply(ans, xmlGetAttr, "pressure"))
+  rising<-as.numeric(sapply(ans, xmlGetAttr, "rising"))
+  
+  ans<-getNodeSet(doc, "//item/yweather:condition",c(yweather="http://xml.weather.yahoo.com/ns/rss/1.0"))
+  code<-sapply(ans, xmlGetAttr, "code")
+  
+  ans<-getNodeSet(doc, "//item/yweather:forecast[1]",c(yweather="http://xml.weather.yahoo.com/ns/rss/1.0"))
+  low<-as.numeric(sapply(ans, xmlGetAttr, "low"))
+  high<-as.numeric(sapply(ans, xmlGetAttr, "high"))
+  
+  print(paste(x,'==>',low,high,code,humidity,visibility,pressure,rising))
+  cbind(low,high,code,humidity,visibility,pressure,rising)
 }
 w<-getWeather(2151330);w
 
