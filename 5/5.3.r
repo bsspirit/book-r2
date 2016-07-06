@@ -120,37 +120,31 @@ summary(data,output=TRUE,path=path)
 
 library(devtools)
 #install_github("taiyun/recharts")
+#install_github('ramnathv/htmlwidgets')
+#install_github('rstudio/htmltools')
+#install_github('taiyun/recharts@htmlwidgets')
 library(recharts)
 
-weather_html<-function(data=data,type='high',output=FALSE,path=''){
-   if(type=='high') {
-       df<-data[,c('prov','high')]
-       names(df)<-c("prov","气温")
-       title<-paste(format(date,"%Y-%m-%d"),"中国各省白天气温",sep="")
-       ofile<-paste(format(date,"%Y%m%d"),"_day.html",sep="")
-   }else if(type=='low'){
-       df<-data[,c('prov','low')]
-       names(df)<-c("prov","气温")
-       title<-paste(format(date,"%Y-%m-%d"),"中国各省夜间气温",sep="")
-       ofile<-paste(format(date,"%Y%m%d"),"_night.html",sep="")
-   }
-
-   df[,1]<-substr(df[,1],0,2)
-   df[which(df$prov=='黑龙'),]$prov<-'黑龙江'
-   df[which(df$prov=='内蒙'),]$prov<-'内蒙古'
-
-   recharts.eMap <- eMap(df, namevar=1, datavar = 2, title=title)
-   if(output){
-       recharts.eMap$outList[c('chartid','type')]<-NULL
-       writeLines(unlist(recharts.eMap$outList),paste(path,ofile,sep=''))
-   }else{
-       plot(recharts.eMap)
-   }
+weather_html<-function(data=data,type='high',path=''){
+  if(type=='high') {
+    df<-data[,c('prov','high')]
+    names(df)<-c("prov","气温")
+    title<-paste(format(date,"%Y-%m-%d"),"中国各省白天气温",sep="")
+  }else if(type=='low'){
+    df<-data[,c('prov','low')]
+    names(df)<-c("prov","气温")
+    title<-paste(format(date,"%Y-%m-%d"),"中国各省夜间气温",sep="")
+  }
+  
+  df[,1]<-substr(df[,1],0,2)
+  df[which(df$prov=='黑龙'),]$prov<-'黑龙江'
+  df[which(df$prov=='内蒙'),]$prov<-'内蒙古'
+  
+  eMap(df, namevar=1, datavar = 2, title=title)
 }
 date<-as.Date('20141001',format='%Y%m%d')
 data<-read.csv(file=filename(date),header=TRUE,fileEncoding="utf-8", encoding="utf-8")
-path=''
-weather_html(data,type='high',output=FALSE,path='')
-weather_html(data,type='low', output=FALSE,path='')
-weather_html(data,type='low',output=TRUE,path='')
+
+weather_html(data,type='high')
+weather_html(data,type='low')
 
